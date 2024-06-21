@@ -6,19 +6,38 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:gen": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
+    "@tanstack/react-form": "^0.23.2",
+    "@tanstack/react-query": "^5.45.0",
+    "@tanstack/react-query-devtools": "^5.45.1",
+    "@tanstack/zod-form-adapter": "^0.23.2",
+    "@trpc/client": "11.0.0-rc.402",
+    "@trpc/next": "11.0.0-rc.402",
+    "@trpc/react-query": "11.0.0-rc.402",
+    "@trpc/server": "11.0.0-rc.402",
+    "clsx": "^2.1.1",
+    "drizzle-orm": "^0.31.2",
+    "next": "14.2.4",
+    "postgres": "^3.4.4",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.2.4"
+    "tailwind-merge": "^2.3.0",
+    "use-debounce": "^10.0.1",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "drizzle-kit": "^0.22.7",
     "postcss": "^8",
-    "tailwindcss": "^3.4.1"
-  }
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  },
+  "packageManager": "pnpm@9.3.0"
 }
