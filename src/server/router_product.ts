@@ -1,5 +1,5 @@
 import { products } from "@/database/product";
-import { eq, ilike, or, sql } from "drizzle-orm";
+import { desc, eq, ilike, or } from "drizzle-orm";
 import { z } from "zod";
 import { db } from "./database";
 import { publicProcedure, router } from "./trpc";
@@ -26,13 +26,14 @@ export const productRouter = router({
         ? ilike(products.brand, opts.input.brand)
         : undefined;
 
-      return db
+      const result = db
         .select()
         .from(products)
         .where(or(whereSearch, whereBrand))
         .limit(opts.input.per_page)
         .offset(offset)
-        .orderBy();
+        .orderBy(desc(products.id));
+      return result;
     }),
   create: publicProcedure
     .input(
@@ -41,7 +42,7 @@ export const productRouter = router({
         code: z.string(),
         brand: z.string(),
         price: z.number(),
-        stock: z.number(),
+        quantity: z.number(),
       })
     )
     .mutation(async (opts) => {
@@ -52,7 +53,7 @@ export const productRouter = router({
           code: opts.input.code,
           brand: opts.input.brand,
           price: opts.input.price,
-          stock: opts.input.stock,
+          quantity: opts.input.quantity,
         })
         .returning();
     }),
@@ -64,7 +65,7 @@ export const productRouter = router({
         code: z.string(),
         brand: z.string(),
         price: z.number(),
-        stock: z.number(),
+        quantity: z.number(),
       })
     )
     .mutation(async (opts) => {
@@ -75,23 +76,23 @@ export const productRouter = router({
           code: opts.input.code,
           brand: opts.input.brand,
           price: opts.input.price,
-          stock: opts.input.stock,
+          quantity: opts.input.quantity,
         })
         .where(eq(products.id, opts.input.id))
         .returning();
     }),
-  updateStock: publicProcedure
+  updateQuantity: publicProcedure
     .input(
       z.object({
         id: z.number(),
-        stock: z.number(),
+        quantity: z.number(),
       })
     )
     .mutation(async (opts) => {
       return db
         .update(products)
         .set({
-          stock: opts.input.stock,
+          quantity: opts.input.quantity,
         })
         .where(eq(products.id, opts.input.id))
         .returning();

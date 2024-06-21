@@ -61,8 +61,8 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div>
-      <div>
+    <div className="w-full flex flex-col items-start gap-4">
+      <div className="w-full flex justify-end">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
@@ -90,7 +90,7 @@ export function DataTable<TData, TValue>({
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="rounded-md border">
+      <div className="w-full rounded-md border">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
