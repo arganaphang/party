@@ -4,9 +4,9 @@ import { productRouter } from "./router_product";
 import { router } from "./trpc";
 
 export const appRouter = router({
-  health: healthRouter,
-  brand: brandRouter,
-  product: productRouter,
+	health: healthRouter,
+	brand: brandRouter,
+	product: productRouter,
 });
 
 export type AppRouter = typeof appRouter;
